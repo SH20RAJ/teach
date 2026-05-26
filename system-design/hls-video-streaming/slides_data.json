@@ -1,0 +1,53 @@
+{
+  "currentSlideIndex": 0,
+  "slides": [
+    {
+      "id": "slide_1",
+      "title": "1. First Understand the Problem",
+      "content": "### Direct File Download (`movie.mp4`)\n- **Problem 1:** Huge Startup Delay (must download container metadata and initial buffering).\n- **Problem 2:** Bandwidth Waste (user leaves in 2 minutes = 2GB wasted server bandwidth).\n- **Problem 3:** Fluctuating Networks (speeds drops = freeze, buffer, stop).\n\n### The Solution: HLS\n- We split the video into tiny pieces.\n- We fetch them dynamically on the fly.",
+      "notes": "Explain why streaming movie.mp4 directly is a failure. Use the buffering experience to connect with students.",
+      "layout": "split",
+      "excalidrawState": ""
+    },
+    {
+      "id": "slide_2",
+      "title": "2. Imagine the Chunking Scene",
+      "content": "### The Book Analogy\n- **1000-page Novel** = Raw Video File (`movie.mp4`)\n- **Tearing the book** = **Chunking / Segmenting**\n- **Brochures** = **Video Chunks** (`.ts` / `.m4s` chunks, 2-6s long)\n- **Index Card** = **Playlist File** (`.m3u8` playlist index)\n- **Shelves** = **Web Servers / CDN**\n\n*The client never holds the whole movie file. It only requests small chunk files as it plays.*",
+      "notes": "Ask students: How do we carry a 1000 page book? Tear it into small brochures. Show how it maps to HLS segments.",
+      "layout": "split",
+      "excalidrawState": ""
+    },
+    {
+      "id": "slide_3",
+      "title": "3. The Playback Flow Loop",
+      "content": "### Movie-like Playback Rhythm\n```text\nClient fetches playlist file (.m3u8)\n\"Where is segment 1?\" -> Index points to cdn.com/seg1.ts\nClient fetches seg1.ts -> Plays seg1.ts\n\nWhile playing...\n\"Where is segment 2?\" -> Index points to cdn.com/seg2.ts\nClient fetches seg2.ts -> Buffers seg2.ts\n\nSeg1 finishes -> Instantly plays Seg2\n\"Where is segment 3?\" ...\n```",
+      "notes": "Read through this sequence with a steady rhythm to mimic the machine execution flow.",
+      "layout": "text",
+      "excalidrawState": ""
+    },
+    {
+      "id": "slide_4",
+      "title": "4. Adaptive Bitrate (ABR)",
+      "content": "### The Multi-Lane Highway\n- **Fast Lane (High quality):** 1080p stream\n- **Medium Lane (Medium quality):** 720p stream\n- **Slow Lane (Low quality):** 360p stream\n\nWe encode the video into *different bandwidth tracks* and chunk *each* track. The client player measures local network speed and switches playlists dynamically.",
+      "notes": "Draw the transition from high network speed to low network speed. Explain that the video resolution drops but the video NEVER freezes.",
+      "layout": "split",
+      "excalidrawState": ""
+    },
+    {
+      "id": "slide_5",
+      "title": "5. HLS System Architecture Whiteboard",
+      "content": "### HLS End-to-End Pipeline\n1. **Encoder (Transcoder):** Multi-bitrate H.264/AAC output.\n2. **Packager (Segmenter):** Slices streams into TS chunks & writes M3U8 files.\n3. **CDN / Cache:** Standard web server handles files easily (cachable HTTP).\n4. **Player Client:** Downloads playlists, monitors speed, pulls segments.",
+      "notes": "Draw the full architecture box diagram: Encoder -> Packager -> Origin Server -> CDN -> Client Player. Color code the HTTP boundary.",
+      "layout": "drawing",
+      "excalidrawState": ""
+    },
+    {
+      "id": "slide_6",
+      "title": "6. Common Confusions & Recall",
+      "content": "### Common Confusions:\n- **HLS is NOT RTSP/RTMP.** It runs on standard HTTP port 80/443. Firewall-friendly!\n- **Server does NOT push chunks.** The client player pulls them on-demand (client-pull).\n\n### Quick Recall Questions:\n1. Why are segments typically 2 to 6 seconds long rather than 1 minute?\n2. What is the extension of the playlist index files in HLS?\n3. What happens in ABR when a user walks into an elevator?",
+      "notes": "Drill these core system design test points with the student.",
+      "layout": "text",
+      "excalidrawState": ""
+    }
+  ]
+}
