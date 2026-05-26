@@ -9,11 +9,6 @@ This repository contains the complete syllabus, lecture plans, and interactive v
 
 - **[teaching_methodology.md](teaching_methodology.md)**: The pedagogical guide on how to deliver these lectures visually and build long-term student memory.
 - **[concepts_list.md](concepts_list.md)**: Main syllabus index mapping active lesson plans.
-- **[hls-video-streaming/](hls-video-streaming/)**: Core interactive application.
-  - **[index.html](hls-video-streaming/index.html)**: Interactive Eraser-style slide presenter and drawing board.
-  - **[server.js](hls-video-streaming/server.js)**: Local server to save annotations and slides changes back to file system.
-  - **[slides_data.json](hls-video-streaming/slides_data.json)**: Slide metadata and Excalidraw coordinate store.
-  - **[teaching_doc.md](hls-video-streaming/teaching_doc.md)**: Markdown notes for the HLS Video Streaming lecture.
 - **`concepts/`**: Detailed markdown-only whiteboard lesson plans for core system design topics.
 
 ---
@@ -22,7 +17,7 @@ This repository contains the complete syllabus, lecture plans, and interactive v
 
 1. Open your terminal and start the server:
    ```bash
-   cd hls-video-streaming
+   cd concepts/hls-video-streaming
    node server.js
    ```
 2. Open your web browser:
@@ -34,7 +29,7 @@ You can now use the slides, edit markdown in real-time, draw using the whiteboar
 
 ## 📚 Core Lesson Plans (Markdown)
 
-1. **[HLS Video Streaming](hls-video-streaming/teaching_doc.md)**: Chunking, playlists, and adaptive bitrates.
+1. **[HLS Video Streaming](concepts/hls-video-streaming/teaching_doc.md)**: Chunking, playlists, and adaptive bitrates.
 2. **[Consistent Hashing](concepts/consistent_hashing.md)**: Hash rings, scale outages, and virtual nodes.
 3. **[Rate Limiting](concepts/rate_limiting.md)**: Token Bucket vs Leaky Bucket algorithms.
 4. **[Database Sharding](concepts/database_sharding.md)**: Horizontal database partition keys and query routing.
